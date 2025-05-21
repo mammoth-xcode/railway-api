@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db');
 const jwt = require('jsonwebtoken');
 
-const secret = process.env.JWT_SECRET;
+const secret = process.env.JWT_SECRET || 'Abcd1234*';
 
 router.post('/', (req, res) => {
   const { cus_user, cus_pass } = req.body;
