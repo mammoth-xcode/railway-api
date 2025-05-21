@@ -11,8 +11,12 @@ app.use(express.json());
 
 // Routes
 app.use('/api/customers', require('./routes/customers'));
+
 app.use('/api/orders', require('./routes/orders'));
+app.use('/api/sum_orders', require('./routes/sum_orders'));
+
 app.use('/api/login', require('./routes/login'));
+
 // app.use('/api/products', require('./routes/products'));
 
 // Server
