@@ -18,7 +18,7 @@ app.use('/api/orders_product_detail', require('./routes/orders_product_detail'))
 
 app.use('/api/login', require('./routes/login'));
 
-// app.use('/api/products', require('./routes/products'));
+app.use('/api/products', require('./routes/products'));
 
 // Server
 app.listen(PORT, '0.0.0.0', () => {
