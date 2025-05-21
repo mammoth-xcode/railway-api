@@ -16,6 +16,6 @@ app.use('/api/login', require('./routes/login'));
 // app.use('/api/products', require('./routes/products'));
 
 // Server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
