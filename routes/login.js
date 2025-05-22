@@ -6,13 +6,16 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET || 'Abcd1234*';
 
 router.post('/', (req, res) => {
-  const { cus_user, cus_pass } = req.body;
+  const { cus_user, cus_pass } = req.body || {};
 
-  // console.log('Body:', req.body);
-  console.log('Login as : ', cus_user);
+  if (typeof cus_user !== 'string' || typeof cus_pass !== 'string') {
+    return res.status(400).json({ status: 'Error', message: 'Invalid input format !' });
+  }
 
   if (!cus_user || !cus_pass) {
-    return res.status(400).json({ status: 'Error', message: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน' });
+    const errMsg = !cus_user ? 'Invalid username input !' : 'Invalid password input !';
+    console.log(errMsg);
+    return res.status(400).json({ status: 'Error', message: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน !' });
   }
 
   const query = 'SELECT * FROM `customers` WHERE cus_user = ? AND cus_pass = ?';
@@ -23,6 +26,7 @@ router.post('/', (req, res) => {
     }
 
     if (results.length === 0) {
+      console.log('Request login by : ', cus_user , ', failed !');
       return res.status(401).json({ status: 'Error', message: 'ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด !' });
     }
 
@@ -35,6 +39,8 @@ router.post('/', (req, res) => {
       cus_email: user.cus_email,
       cus_type: user.cus_type
     }, secret, { expiresIn: '1h' });
+
+    console.log('Login as : ', cus_user, ', successfully');
 
     return res.json({
       status: 'OK',
