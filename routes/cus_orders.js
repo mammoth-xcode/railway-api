@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const authenticateToken = require('../middleware/auth'); // Adjust path as needed
 
-router.post('/', (req, res) => {
+router.post('/', authenticateToken, (req, res) => {
   const { cus_id } = req.body;
 
   if (!cus_id) {

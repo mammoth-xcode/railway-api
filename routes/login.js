@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const jwt = require('jsonwebtoken');
+const authenticateToken = require('../middleware/auth'); // Adjust path as needed
 
 const secret = process.env.JWT_SECRET || 'Abcd1234*';
 
-router.post('/', (req, res) => {
+router.post('/', authenticateToken, (req, res) => {
   const { cus_user, cus_pass } = req.body || {};
 
   if (typeof cus_user !== 'string' || typeof cus_pass !== 'string') {

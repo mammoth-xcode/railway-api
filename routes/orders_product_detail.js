@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const authenticateToken = require('../middleware/auth'); // Adjust path as needed
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticateToken, (req, res) => {
   const id = req.params.id;
 
   const sql = `
