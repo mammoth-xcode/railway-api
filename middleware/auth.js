@@ -1,4 +1,4 @@
-const API_TOKEN = process.env.API_TOKEN || 'your-secure-api-token';
+const API_TOKEN = process.env.API_TOKEN || '3c3240cf-0949-4400-a0cd-6b1a857bc30e';
 
 function authenticateToken(req, res, next) {
   const token = req.headers['authorization'];
