@@ -8,7 +8,8 @@ const secret = process.env.JWT_SECRET || 'Abcd1234*';
 router.post('/', (req, res) => {
   const { cus_user, cus_pass } = req.body;
 
-  console.log('Body:', req.body);
+  // console.log('Body:', req.body);
+  console.log('Login as : ', cus_user);
 
   if (!cus_user || !cus_pass) {
     return res.status(400).json({ status: 'Error', message: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน' });
@@ -22,7 +23,7 @@ router.post('/', (req, res) => {
     }
 
     if (results.length === 0) {
-      return res.status(401).json({ status: 'Error', message: 'ไม่พบผู้ใช้งานนี้' });
+      return res.status(401).json({ status: 'Error', message: 'ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด !' });
     }
 
     const user = results[0];
